@@ -26,7 +26,7 @@ public class SpeakServiceServlet extends HttpServlet {
     private CqlSession session;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         session = CqlSession.builder()
                 .addContactPoint(new InetSocketAddress("host.docker.internal", 9042))
                 .withLocalDatacenter("datacenter1")
