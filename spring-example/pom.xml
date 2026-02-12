@@ -1,92 +1,96 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
+  <parent>
+    <groupId>com.test.tracing</groupId>
+    <artifactId>tracing-example</artifactId>
+    <version>0.2.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>spring-example</artifactId>
+  <packaging>pom</packaging>
+
+  <name>${project.groupId}:${project.artifactId}</name>
+
+  <modules>
+    <module>spring-echo-service</module>
+    <module>spring-agent-example</module>
+    <module>spring-boot-agent-example</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
         <groupId>com.test.tracing</groupId>
-        <artifactId>tracing-example</artifactId>
-        <version>0.2.1-SNAPSHOT</version>
-    </parent>
+        <artifactId>spring-echo-service</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
-    <artifactId>spring-example</artifactId>
-    <packaging>pom</packaging>
+      <dependency>
+        <groupId>jakarta.ws.rs</groupId>
+        <artifactId>jakarta.ws.rs-api</artifactId>
+        <version>${jaxrs-api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.github.openfeign</groupId>
+        <artifactId>feign-core</artifactId>
+        <version>${feign.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.github.openfeign</groupId>
+        <artifactId>feign-jaxrs3</artifactId>
+        <version>${feign.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.github.openfeign</groupId>
+        <artifactId>feign-okhttp</artifactId>
+        <version>${feign.version}</version>
+      </dependency>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-    <modules>
-        <module>spring-echo-service</module>
-        <module>spring-agent-example</module>
-        <module>spring-boot-agent-example</module>
-    </modules>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.test.tracing</groupId>
-                <artifactId>spring-echo-service</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>jakarta.ws.rs</groupId>
-                <artifactId>jakarta.ws.rs-api</artifactId>
-                <version>${jaxrs-api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.openfeign</groupId>
-                <artifactId>feign-core</artifactId>
-                <version>${feign.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.openfeign</groupId>
-                <artifactId>feign-jaxrs3</artifactId>
-                <version>${feign.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.openfeign</groupId>
-                <artifactId>feign-okhttp</artifactId>
-                <version>${feign.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring-boot.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <classifier>exec</classifier>
-                        <wait>60000</wait>
-                        <agents>${agent.jar}</agents>
-                        <jvmArguments>
-                          -Dotel.javaagent.extensions=${extension.dir}
-                          -Dotel.javaagent.configuration-file=${agent.config}
-                          -Ddb_usr=appuser -Ddb_pwd=123456
-                          <!--
-                          -agentlib:jdwp=transport=dt_socket,server=y,address=8000
-                          -->
-                        </jvmArguments>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring-boot.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <classifier>exec</classifier>
+            <wait>60000</wait>
+            <agents>
+              <agent>${opentelemetry.agent.jar}</agent>
+              <agent>${pyroscope.agent.jar}</agent>
+            </agents>
+            <jvmArguments>
+              -Dotel.javaagent.extensions=${extension.dir}
+              -Dotel.javaagent.configuration-file=${opentelemetry.agent.config}
+              -Dpyroscope.configuration.file=${pyroscope.agent.config}
+              -Ddb_usr=appuser -Ddb_pwd=123456
+              <!--
+              -agentlib:jdwp=transport=dt_socket,server=y,address=8000
+              -->
+            </jvmArguments>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
