@@ -28,27 +28,26 @@
     <pyroscope.agent.config>etc/pyroscope.properties</pyroscope.agent.config>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <opentelemetry.version>2.4.0</opentelemetry.version>
+    <opentelemetry.version>2.24.0</opentelemetry.version>
     <pyroscope.version>2.1.2</pyroscope.version>
     <auto-service.version>1.1.1</auto-service.version>
-    <spring.version>6.1.21</spring.version>
-    <spring-boot.version>3.2.6</spring-boot.version>
-    <jaeger.version>1.8.1</jaeger.version>
-    <cxf.version>4.0.7</cxf.version>
-    <jetty.version>11.0.24</jetty.version>
-    <feign.version>13.2.1</feign.version>
+    <spring.version>6.2.15</spring.version>
+    <spring-boot.version>3.5.10</spring-boot.version>
+    <cxf.version>4.1.4</cxf.version>
+    <jetty.version>11.0.26</jetty.version>
+    <feign.version>13.8</feign.version>
     <jackson.version>2.17.1</jackson.version>
-    <slf4j-api.version>2.0.13</slf4j-api.version>
-    <logback.version>1.5.25</logback.version>
-    <httpclient.version>4.5.14</httpclient.version>
+    <slf4j-api.version>2.0.17</slf4j-api.version>
+    <logback.version>1.5.29</logback.version>
+    <httpclient.version>5.5.2</httpclient.version>
     <servlet-api.version>6.1.0</servlet-api.version>
     <jaxrs-api.version>4.0.0</jaxrs-api.version>
-    <jedis.version>4.3.1</jedis.version>
-    <redisson.version>3.31.0</redisson.version>
-    <c3p0.version>0.10.1</c3p0.version>
-    <mchange-commons.version>0.3.1</mchange-commons.version>
-    <mysql.version>8.4.0</mysql.version>
-    <cassandra-driver.version>3.11.5</cassandra-driver.version>
+    <jedis.version>7.2.1</jedis.version>
+    <redisson.version>3.52.0</redisson.version>
+    <c3p0.version>0.11.2</c3p0.version>
+    <mchange-commons.version>0.3.2</mchange-commons.version>
+    <mysql.version>9.6.0</mysql.version>
+    <cassandra-driver.version>4.19.2</cassandra-driver.version>
   </properties>
 
   <build>
@@ -245,8 +244,8 @@
       </dependency>
 
       <dependency>
-        <groupId>org.apache.httpcomponents</groupId>
-        <artifactId>httpclient</artifactId>
+        <groupId>org.apache.httpcomponents.client5</groupId>
+        <artifactId>httpclient5</artifactId>
         <version>${httpclient.version}</version>
       </dependency>
 
@@ -311,8 +310,8 @@
       </dependency>
 
       <dependency>
-        <groupId>com.datastax.cassandra</groupId>
-        <artifactId>cassandra-driver-core</artifactId>
+        <groupId>org.apache.cassandra</groupId>
+        <artifactId>java-driver-core</artifactId>
         <version>${cassandra-driver.version}</version>
       </dependency>
 

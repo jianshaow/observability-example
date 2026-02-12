@@ -13,26 +13,32 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.Session;
+import com.datastax.oss.driver.api.core.CqlSession;
+import com.datastax.oss.driver.api.core.cql.SimpleStatement;
+
+import java.net.InetSocketAddress;
 
 public class SpeakServiceServlet extends HttpServlet {
 
     @Serial
     private static final long serialVersionUID = -7766401686496991505L;
 
-    private Session session;
+    private CqlSession session;
 
     @Override
     public void init() throws ServletException {
-        session = Cluster.builder().addContactPoint("host.docker.internal").build().connect("mydb");
+        session = CqlSession.builder()
+                .addContactPoint(new InetSocketAddress("host.docker.internal", 9042))
+                .withLocalDatacenter("datacenter1")
+                .withKeyspace("mydb")
+                .build();
     }
 
     @Override
     public void destroy() {
-        final Cluster cluster = session.getCluster();
-        session.close();
-        cluster.close();
+        if (session != null) {
+            session.close();
+        }
     }
 
     @Override
@@ -48,6 +54,9 @@ public class SpeakServiceServlet extends HttpServlet {
     }
 
     private void accessDB() {
-        session.execute("select name from application where id = ?", 1);
+        SimpleStatement statement = SimpleStatement.builder("SELECT name FROM application WHERE id = ?")
+                .addPositionalValue(1)
+                .build();
+        session.execute(statement);
     }
 }
