@@ -48,8 +48,6 @@ public class SpeakServiceServlet extends HttpServlet {
             resp.setContentType("text/plain");
             final String msg = IOUtils.toString(in, StandardCharsets.UTF_8);
             out.print(msg);
-            in.close();
-            out.close();
         }
     }
 

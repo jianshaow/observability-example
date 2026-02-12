@@ -37,8 +37,6 @@ public class EchoServiceServlet extends HttpServlet {
             result = this.callSpeakService(result);
             out.print(result);
             logger.info("echo back the result: {}", result);
-            in.close();
-            out.close();
         }
     }
 
