@@ -10,7 +10,7 @@
   <name>${project.groupId}:${project.artifactId}</name>
 
   <modules>
-    <module>extension</module>
+    <module>tracing-extension</module>
     <module>webapp-example</module>
     <module>cxf-example</module>
     <module>spring-example</module>
