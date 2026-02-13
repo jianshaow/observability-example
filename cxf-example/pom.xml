@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.test.tracing</groupId>
-        <artifactId>tracing-example</artifactId>
-        <version>0.2.1-SNAPSHOT</version>
+        <groupId>com.test.observability</groupId>
+        <artifactId>observability-example</artifactId>
+        <version>0.3.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>cxf-example</artifactId>
@@ -21,7 +21,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.test.tracing</groupId>
+                <groupId>com.test.observability</groupId>
                 <artifactId>cxf-echo-service</artifactId>
                 <version>${project.version}</version>
             </dependency>

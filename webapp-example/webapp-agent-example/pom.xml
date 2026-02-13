@@ -3,9 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.test.tracing</groupId>
+    <groupId>com.test.observability</groupId>
     <artifactId>webapp-example</artifactId>
-    <version>0.2.1-SNAPSHOT</version>
+    <version>0.3.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>webapp-agent-example</artifactId>
