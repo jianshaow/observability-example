@@ -42,7 +42,6 @@ CREATE TABLE mydb.application (
 
 * Jaeger server
 * Pyroscope server
-* Grafana server
 
 ## Execution
 ```shell
