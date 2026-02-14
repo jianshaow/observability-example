@@ -15,7 +15,7 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>extension</artifactId>
+      <artifactId>tracing-extension</artifactId>
     </dependency>
 
     <dependency>
