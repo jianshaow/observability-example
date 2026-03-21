@@ -44,7 +44,7 @@
     <jaxrs-api.version>4.0.0</jaxrs-api.version>
     <jedis.version>7.2.1</jedis.version>
     <redisson.version>3.52.0</redisson.version>
-    <c3p0.version>0.11.2</c3p0.version>
+    <c3p0.version>0.12.0</c3p0.version>
     <mchange-commons.version>0.3.2</mchange-commons.version>
     <mysql.version>9.6.0</mysql.version>
     <cassandra-driver.version>4.19.2</cassandra-driver.version>
